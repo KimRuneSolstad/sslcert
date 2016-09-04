@@ -50,7 +50,7 @@ class sslcert ( $certificate ){
 
   $path = $::osfamily ? {
     'Debian' => "/etc/ssl/CA",
-    'Centos' => "/etc/pki/CA",
+    'RedHat' => "/etc/pki/CA",
     'default'=> "/root/CA",
   }
 
