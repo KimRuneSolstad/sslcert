@@ -44,25 +44,25 @@
 #
 
 class sslcert ( $certificate ){
-  $path_centos = "/etc/pki/CA"
-  $path_ubuntu = "/etc/ssl/CA"
-  $path_test = "/home/kimkong"
+  $path_centos = '/etc/pki/CA'
+  $path_ubuntu = '/etc/ssl/CA'
+  $path_test = '/home/kimkong'
 
   $path = $::osfamily ? {
-    'Debian' => "/etc/ssl/CA",
-    'RedHat' => "/etc/pki/CA",
-    'default'=> "/root/CA",
+    'Debian' => '/etc/ssl/',
+    'RedHat' => '/etc/pki/CA',
+    'default'=> '/root/CA',
   }
 
   notice ( "using the path: ${path}")
 
-  file {["$path/CA", "${path}/CA/csr", "${path}/certs", "${path}/crl", "${path}/private", "${path}/newcerts"] :
+  file {["${path}/CA", "${path}/CA/csr", "${path}/certs", "${path}/crl", "${path}/private", "${path}/newcerts"] :
     ensure => directory,
   }
 
   file {"${path}/CA/serial":
     ensure  => file,
-    content => "01",
+    content => '01',
   }
 
   file {"${path}/CA/index.txt":
