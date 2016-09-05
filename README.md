@@ -1,3 +1,4 @@
+[![Build Status](https://img.shields.io/travis/KimRuneSolstad/sslcert.svg)](https://travis-ci.org/KimRuneSolstad/sslcert)
 
 # sslcert
 
