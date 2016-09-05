@@ -44,10 +44,6 @@
 #
 
 class sslcert ( $certificate ){
-  $path_centos = '/etc/pki/CA'
-  $path_ubuntu = '/etc/ssl/CA'
-  $path_test = '/home/kimkong'
-
   $path = $::osfamily ? {
     'Debian' => '/etc/ssl/',
     'RedHat' => '/etc/pki/CA',
