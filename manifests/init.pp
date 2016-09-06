@@ -79,13 +79,13 @@ class sslcert {
 
   file {"${ca_path}/serial":
     ensure  => file,
-    replace => 'no'
+    replace => 'no',
     content => '01',
   }
 
   file {"${ca_path}/index.txt":
     ensure  => file,
-    replace => 'no'
+    replace => 'no',
   }
 
   file {"${ca_path}/openssl.cnf":
