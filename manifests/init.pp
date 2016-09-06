@@ -44,10 +44,11 @@
 #
 
 class sslcert {
-    $path = $::osfamily ? {
-      'Debian' => '/etc/ssl',
-      'RedHat' => '/etc/pki/CA',
-    }
+  #    $path = $::osfamily ? {
+  #      'Debian' => '/etc/ssl',
+  #      'RedHat' => '/etc/pki/CA',
+  #    }
+  $path = '/etc/ssl'
 
   notice ( "using the path: ${path}")
 
@@ -65,10 +66,12 @@ class sslcert {
     source => 'puppet:///modules/sslcert/root/certs/ca.cert.pem',
   }
 
-  $ca_path = $::osfamily ? {
-    'Debian' => '/etc/ssl/CA',
-    'RedHat' => '/etc/pki/CA',
-  }
+  #  $ca_path = $::osfamily ? {
+  #    'Debian' => '/etc/ssl/CA',
+  #    'RedHat' => '/etc/pki/CA',
+  #  }
+
+  $ca_path = '/etc/ssl/CA'
 
   file {[$ca_path, "${ca_path}/csr"] :
     ensure => directory,
