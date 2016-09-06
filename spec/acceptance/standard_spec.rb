@@ -19,25 +19,55 @@ describe 'sslcert class' do
 
   context 'managing CA' do
 
-    describe file('/etc/ssl/CA/serial') do
-      it { should be_file }
-    end
+    if $::osfamily == 'RedHat' {
 
-    describe file('/etc/ssl/CA/index.txt') do
-      it { should be_file }
-    end
+      describe file('/etc/pki/CA/serial') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/pki/CA/index.txt') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/pki/CA/openssl.cnf') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/pki/CA/private/ca.key.pem') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/pki/CA/certs/ca.cert.pem') do
+        it { should be_file }
+      end
+      
 
-    describe file('/etc/ssl/CA/openssl.cnf') do
-      it { should be_file }
-    end
+    } elseif $::osfamily == 'Debian' {
 
-    describe file('/etc/ssl/private/ca.key.pem') do
-      it { should be_file }
-    end
+      describe file('/etc/ssl/CA/serial') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/ssl/CA/index.txt') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/ssl/CA/openssl.cnf') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/ssl/private/ca.key.pem') do
+        it { should be_file }
+      end
+  
+      describe file('/etc/ssl/certs/ca.cert.pem') do
+        it { should be_file }
+      end
 
-    describe file('/etc/ssl/certs/ca.cert.pem') do
-      it { should be_file }
-    end
+    } else {
+      fail( "This module does not support ${::operatingsystem}." )
+    }
+
 
   end
 

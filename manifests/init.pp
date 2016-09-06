@@ -44,11 +44,10 @@
 #
 
 class sslcert {
-  #  $path = $::osfamily ? {
-  #    'Debian' => '/etc/ssl',
-  #    'RedHat' => '/etc/pki/CA',
-  #  }
-  $path = '/etc/ssl'
+    $path = $::osfamily ? {
+      'Debian' => '/etc/ssl',
+      'RedHat' => '/etc/pki/CA',
+    }
 
   notice ( "using the path: ${path}")
 
