@@ -9,12 +9,13 @@ gem 'rspec-puppet'
 gem 'beaker'
 gem 'beaker-rspec'
 gem 'beaker-puppet_install_helper'
+gem 'puppet', puppetversion
 
-if puppetversion = ENV['PUPPET_GEM_VERSION']
-  gem 'puppet', puppetversion, :require => false
-else
-  gem 'puppet', require => false
-end
+#if puppetversion = ENV['PUPPET_GEM_VERSION']
+#  gem 'puppet', puppetversion, :require => false
+#else
+#  gem 'puppet', require => false
+#end
 
 
 # rspec must be v2 for ruby 1.8.7

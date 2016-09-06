@@ -9,6 +9,8 @@
 # Learn more about module testing here:
 # https://docs.puppet.com/guides/tests_smoke.html
 #
-class {'sslcert':
-  certificate => 'puppet:///modules/sslcert/root/certs/ca.cert.pem'
-}
+include sslcert
+#class {'sslcert':
+#  certificate => 'puppet:///modules/sslcert/root/certs/ca.cert.pem'
+#}
+

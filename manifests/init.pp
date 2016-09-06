@@ -43,31 +43,17 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 
-class sslcert ( $certificate ){
-  $path = $::osfamily ? {
-    'Debian' => '/etc/ssl/',
-    'RedHat' => '/etc/pki/CA',
-    'default'=> '/root/CA',
-  }
+class sslcert {
+  #  $path = $::osfamily ? {
+  #    'Debian' => '/etc/ssl',
+  #    'RedHat' => '/etc/pki/CA',
+  #  }
+  $path = '/etc/ssl'
 
   notice ( "using the path: ${path}")
 
-  file {["${path}/CA", "${path}/CA/csr", "${path}/certs", "${path}/crl", "${path}/private", "${path}/newcerts"] :
+  file {["${path}/certs", "${path}/crl", "${path}/private", "${path}/newcerts"] :
     ensure => directory,
-  }
-
-  file {"${path}/CA/serial":
-    ensure  => file,
-    content => '01',
-  }
-
-  file {"${path}/CA/index.txt":
-    ensure  => file,
-  }
-
-  file {"${path}/CA/openssl.cnf":
-    ensure => file,
-    source => 'puppet:///modules/sslcert/openssl_test1.cnf'
   }
 
   file {"${path}/private/ca.key.pem":
@@ -77,7 +63,30 @@ class sslcert ( $certificate ){
 
   file {"${path}/certs/ca.cert.pem":
     ensure => file,
-    source => $certificate,
+    source => 'puppet:///modules/sslcert/root/certs/ca.cert.pem',
+  }
+
+  $ca_path = $::osfamily ? {
+    'Debian' => '/etc/ssl/CA',
+    'RedHat' => '/etc/pki/CA',
+  }
+
+  file {["${ca_path}", "${ca_path}/csr"] :
+    ensure => directory,
+  }
+
+  file {"${ca_path}/serial":
+    ensure  => file,
+    content => '01',
+  }
+
+  file {"${ca_path}/index.txt":
+    ensure  => file,
+  }
+
+  file {"${ca_path}/openssl.cnf":
+    ensure => file,
+    source => 'puppet:///modules/sslcert/openssl_test1.cnf'
   }
 }
 
