@@ -70,7 +70,7 @@ class sslcert {
     'RedHat' => '/etc/pki/CA',
   }
 
-  file {["${ca_path}", "${ca_path}/csr"] :
+  file {[${ca_path}, "${ca_path}/csr"] :
     ensure => directory,
   }
 
