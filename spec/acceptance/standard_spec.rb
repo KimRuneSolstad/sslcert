@@ -19,7 +19,7 @@ describe 'sslcert class' do
 
   context 'managing CA' do
 
-    if $::osfamily == 'RedHat' do
+    if $::osfamily == 'RedHat'
 
       describe file('/etc/pki/CA/serial') do
         it { should be_file }
@@ -41,8 +41,7 @@ describe 'sslcert class' do
         it { should be_file }
       end
 
-    end
-    else if $::osfamily == 'Debian' do
+    else
 
       describe file('/etc/ssl/CA/serial') do
         it { should be_file }
