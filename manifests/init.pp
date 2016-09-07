@@ -43,12 +43,11 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 
-class sslcert {
+class sslcert ($cert, $key){
   $path = $::osfamily ? {
     'Debian' => '/etc/ssl',
     'RedHat' => '/etc/pki/CA',
   }
-      #$path = '/etc/ssl'
 
   notice ( "using the path: ${path}")
 
@@ -58,20 +57,18 @@ class sslcert {
 
   file {"${path}/private/ca.key.pem":
     ensure => file,
-    source => 'puppet:///modules/sslcert/root/private/ca.key.pem',
+    source => $key,
   }
 
   file {"${path}/certs/ca.cert.pem":
     ensure => file,
-    source => 'puppet:///modules/sslcert/root/certs/ca.cert.pem',
+    source => $cert,
   }
 
-  $ca_path = $::osfamily ? {
-    'Debian' => '/etc/ssl/CA',
-    'RedHat' => '/etc/pki/CA',
-  }
-
-    #$ca_path = '/etc/ssl/CA'
+   $ca_path = $::osfamily ? {
+     'Debian' => '/etc/ssl/CA',
+     'RedHat' => '/etc/pki/CA',
+   }
 
   file {[$ca_path, "${ca_path}/csr"] :
     ensure => directory,

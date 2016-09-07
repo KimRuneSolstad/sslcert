@@ -9,6 +9,7 @@ gem 'rspec-puppet'
 gem 'beaker'
 gem 'beaker-rspec'
 gem 'beaker-puppet_install_helper'
+gem 'rspec-puppet-facts',                                :require => false
 #gem 'puppet', puppetversion
 
 if puppetversion = ENV['PUPPET_GEM_VERSION']
